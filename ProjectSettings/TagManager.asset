@@ -7,6 +7,7 @@ TagManager:
   - ButtonActivator
   - ButtonTrigger
   - TestCube
+  - Finger
   layers:
   - Default
   - TransparentFX

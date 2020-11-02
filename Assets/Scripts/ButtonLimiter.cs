@@ -14,6 +14,13 @@ public class ButtonLimiter : MonoBehaviour
 
     void Awake()
     {
+
+        if(buttonTrigger == null)
+        {
+            Debug.Log("ERROR: No trigger assigned on button " + gameObject.name);
+            buttonTrigger = null;
+        }
+
         //calculate min distance between activator and trigger (highest it can come out of the base)
         minDistance = Vector3.Distance(buttonTrigger.transform.position, transform.position);
 
@@ -40,4 +47,5 @@ public class ButtonLimiter : MonoBehaviour
         }
 
     }
+
 }

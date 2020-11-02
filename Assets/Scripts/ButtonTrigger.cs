@@ -9,8 +9,10 @@ public class ButtonTrigger : MonoBehaviour
     //this script is for detecting when the button reaches the trigger zone
     //when it does it should trigger an event
 
-    public delegate void MenuButtonPress(string whichButton); //any method that wants to sub to event doesn't need parameters and returns void
+    //the event will send out the name of which button was pressed
+    public delegate void MenuButtonPress(string whichButton); 
     public static event MenuButtonPress onMenuButtonPress; //event to subscribe to, static so it can be used in other classes
+
     private bool pressedInProgress = false;
 
     private void OnTriggerEnter(Collider other)
@@ -18,6 +20,8 @@ public class ButtonTrigger : MonoBehaviour
         if (other.gameObject.tag == "ButtonActivator" && !pressedInProgress)
         {
             pressedInProgress = true;
+
+            VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch); //might need to trigger for specific hand?
 
             //tell observers about which button was pressed
             onMenuButtonPress?.Invoke(this.gameObject.name);

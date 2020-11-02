@@ -5,68 +5,22 @@ using UnityEngine.UI;
 
 public class BananaScript : MonoBehaviour
 {
+    //this script is attached to objects so they know what to do when a button was pressed
 
-    private GameObject menuPrefab;
-
-    private void Awake()
-    {
-        menuPrefab = Resources.Load<GameObject>($"Prefabs/Menu Object");
-    }
-
-    void OnEnable()
-    {
-        //sub event
-        ButtonTrigger.onMenuButtonPress += DescriptionTriggered;
-    }
-
-    void OnDisable()
-    {
-        //unsub event
-        ButtonTrigger.onMenuButtonPress -= DescriptionTriggered;
-    }
+    //this event sends out the transform of the object that was touched
+    public delegate void DescriptionRequest(Transform objectPosition); //the event will send out the name of which button was pressed
+    public static event DescriptionRequest onDescriptionRequest;
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Finger" || other.gameObject.tag == "TestCube")
+        if (other.gameObject.tag == "Finger")
         {
-            //code to spawn menu if the object was touched
-            Debug.Log("Banana touched!");
-            Instantiate(menuPrefab);
+            Debug.Log("Object touched! Description pop up... how about rumble?");
+            VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch);
+
+
+            //tell observers where the object is, the DescriptionController will make a pop up
+            onDescriptionRequest?.Invoke(this.gameObject.transform);
         }
     }
-
-    //if the event triggers then run this method
-    void DescriptionTriggered(string whichButton)
-    {
-        switch (whichButton)
-        {
-            case "YellowButtonTrigger":
-                Debug.Log("Yellow pressed - replace");
-                //code for replacing objects
-
-                break;
-            case "BlueButtonTrigger":
-                Debug.Log("Blue pressed - color");
-                //code for recoloring objects
-
-                break;
-            case "RedButtonTrigger":
-                Debug.Log("Red pressed - resize");
-                //code for resizing objects
-
-                break;
-            case "GreenButtonTrigger":
-                Debug.Log("Green pressed - destroy");
-                //code for destroy
-
-                break;
-
-            default:
-                Debug.Log("Can't find that button trigger");
-                break;
-        }
-
-    }
-
-
 }
