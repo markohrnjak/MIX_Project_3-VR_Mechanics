@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ButtonLimiter : MonoBehaviour
 {
-    //this scirpt is for making sure the button "activator" stays between limits
+    //this script is for making sure the button "activator" stays between limits
 
     [SerializeField] private GameObject buttonTrigger;
     private Vector3 originalPosition;

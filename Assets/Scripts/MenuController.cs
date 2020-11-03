@@ -5,6 +5,8 @@ using UnityEngine;
 public class MenuController : MonoBehaviour
 {
     private GameObject menuPrefab;
+    public GameObject menuSpawnPoint;
+
 
     private void Awake()
     {
@@ -32,8 +34,7 @@ public class MenuController : MonoBehaviour
     {
         Debug.Log("Controller: Here is the menu...");
         //-----------------Create Menu Here! --------------------------
-
-        //Instantiate(menuPrefab);
+        Instantiate(menuPrefab, menuSpawnPoint.transform);
     }
 
 
@@ -44,21 +45,29 @@ public class MenuController : MonoBehaviour
         {
             case "YellowButtonTrigger":
                 Debug.Log("Yellow pressed - replace");
+                VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch); //might need to trigger for specific hand?
+
                 //code for replacing objects
 
                 break;
             case "BlueButtonTrigger":
                 Debug.Log("Blue pressed - color");
+                VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch); //might need to trigger for specific hand?
+
                 //code for recoloring objects
 
                 break;
             case "RedButtonTrigger":
                 Debug.Log("Red pressed - resize");
+                VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch); //might need to trigger for specific hand?
+
                 //code for resizing objects
 
                 break;
             case "GreenButtonTrigger":
                 Debug.Log("Green pressed - destroy");
+                VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch); //might need to trigger for specific hand?
+
                 //code for destroy
 
                 break;

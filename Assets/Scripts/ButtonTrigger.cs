@@ -20,9 +20,6 @@ public class ButtonTrigger : MonoBehaviour
         if (other.gameObject.tag == "ButtonActivator" && !pressedInProgress)
         {
             pressedInProgress = true;
-
-            VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch); //might need to trigger for specific hand?
-
             //tell observers about which button was pressed
             onMenuButtonPress?.Invoke(this.gameObject.name);
         }
