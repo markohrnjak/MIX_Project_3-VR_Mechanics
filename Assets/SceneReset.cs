@@ -11,7 +11,7 @@ public class SceneReset : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void OnCollisionReset(Collision other)
+    private void OnCollisionReset(BoxCollider other)
     {
         if (other.gameObject.tag == "Finger")
             {
