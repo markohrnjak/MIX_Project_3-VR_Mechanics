@@ -33,6 +33,29 @@ public class BananaScript : MonoBehaviour
         scalerObject.transform.localScale = new Vector3(0, 0, 0);
     }
 
+    void Update()
+    {
+        OVRInput.Update();
+        OVRInput.FixedUpdate();
+
+        // returns a float of the Hand Trigger’s current state on the Left Oculus Touch controller.
+        var LeftTrigger = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, OVRInput.Controller.Touch);
+
+        // returns a float of the Hand Trigger’s current state on the Right Oculus Touch controller.
+        var RightTrigger = OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger, OVRInput.Controller.Touch);
+
+
+        if (LeftTrigger != 0f)
+        {
+            onDescriptionRequest?.Invoke(this.gameObject.transform);
+        }
+        else
+        if (RightTrigger != 0f)
+        {
+            onDescriptionRequest?.Invoke(this.gameObject.transform);
+        }
+    }
+
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Finger")
@@ -71,6 +94,25 @@ public class BananaScript : MonoBehaviour
         int randomID = Random.Range(0, replacementObjects.Length);
 
         Resources.Load<GameObject>(replacementObjects[randomID].name);
+    }
+
+    public void resizeObject(float value)
+    {
+        this.transform.localScale = transform.localScale * value;
+    }
+
+    public void toggleMe(bool hide)
+    {
+        if(hide == true)
+        {
+            this.gameObject.GetComponent<Renderer>().enabled = true;
+        }
+
+        if (hide == false)
+        {
+            this.gameObject.GetComponent<Renderer>().enabled = false;
+        }
+
     }
 
     public void destroyMe()

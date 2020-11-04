@@ -390,6 +390,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: YellowButtonTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 8051022862518439930, guid: d38c7be7157c4324e8e3213a48ecf04e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8051022862944271236, guid: d38c7be7157c4324e8e3213a48ecf04e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.414
