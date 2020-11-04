@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
-
+using UnityEngine.SceneManagement;
 public class BananaScript : MonoBehaviour
 {
     //this script is attached to objects so they know what to do when a button was pressed
@@ -29,14 +29,13 @@ public class BananaScript : MonoBehaviour
 
     private void OnEnable()
     {
-        //start minimized
-        scalerObject.transform.localScale = new Vector3(0, 0, 0);
+        ////start minimized
+        //scalerObject.transform.localScale = new Vector3(0, 0, 0);
     }
 
-    void Update()
+    public void Update()
     {
-        OVRInput.Update();
-        OVRInput.FixedUpdate();
+      
 
         // returns a float of the Hand Trigger’s current state on the Left Oculus Touch controller.
         var LeftTrigger = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, OVRInput.Controller.Touch);
@@ -68,7 +67,26 @@ public class BananaScript : MonoBehaviour
     //        onDescriptionRequest?.Invoke(this.gameObject.transform);
     //    }
     //}
-     
+    public void resetScene()
+    {
+
+        // returns a float of the Hand Trigger’s current state on the Left Oculus Touch controller.
+        var LeftTrigger = OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger, OVRInput.Controller.Touch);
+
+        // returns a float of the Hand Trigger’s current state on the Right Oculus Touch controller.
+        var RightTrigger = OVRInput.Get(OVRInput.Axis1D.SecondaryHandTrigger, OVRInput.Controller.Touch);
+
+
+        if (LeftTrigger != 0f)
+        {
+            SceneManager.LoadScene("Main");
+        }
+        else
+        if (RightTrigger != 0f)
+        {
+            SceneManager.LoadScene("Main");
+        }
+    }
     public void ColorChanger()
     {
         if ((rend != null))
@@ -91,9 +109,11 @@ public class BananaScript : MonoBehaviour
 
     public void replaceObject()
     {
-        int randomID = Random.Range(0, replacementObjects.Length);
+        //int randomID = Random.Range(0, replacementObjects.Length);
+        //Resources.Load<GameObject>(replacementObjects[randomID].name);
 
-        Resources.Load<GameObject>(replacementObjects[randomID].name);
+        Resources.Load<Mesh>("SM_Icon_Lock_Closed_01");
+
     }
 
     public void resizeObject(float value)
