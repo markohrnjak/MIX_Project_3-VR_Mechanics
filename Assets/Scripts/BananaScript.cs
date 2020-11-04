@@ -73,5 +73,11 @@ public class BananaScript : MonoBehaviour
         Resources.Load<GameObject>(replacementObjects[randomID].name);
     }
 
+    public void destroyMe()
+    {
+        Destroy(gameObject);
+    }
+
+
 
 }
