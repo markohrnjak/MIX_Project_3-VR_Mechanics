@@ -11,12 +11,26 @@ public class SceneReset : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void OnCollisionReset(BoxCollider other)
+    private void Update()
     {
-        if (other.gameObject.tag == "Finger")
-            {
-                SceneManager.LoadScene("Main");
-            }
-        
+        OVRInput.Update();
+        OVRInput.FixedUpdate();
+
+        // returns a float of the Hand Trigger’s current state on the Left Oculus Touch controller.
+        var LeftTrigger = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, OVRInput.Controller.Touch);
+
+        // returns a float of the Hand Trigger’s current state on the Right Oculus Touch controller.
+        var RightTrigger = OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger, OVRInput.Controller.Touch);
+
+
+        if (LeftTrigger != 0f)
+        {
+            SceneManager.LoadScene("Main");
+        }
+        else
+        if (RightTrigger != 0f)
+        {
+            SceneManager.LoadScene("Main");
+        }
     }
 }

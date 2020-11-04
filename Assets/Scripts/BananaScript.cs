@@ -56,18 +56,18 @@ public class BananaScript : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.tag == "Finger")
-        {
-            Debug.Log("Object touched! Description pop up... how about rumble?");
-            VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch);
+    //private void OnCollisionEnter(Collision other)
+    //{
+    //    if (other.gameObject.tag == "Finger")
+    //    {
+    //        Debug.Log("Object touched! Description pop up... how about rumble?");
+    //        VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch);
 
 
-            //tell observers where the object is, the DescriptionController will make a pop up
-            onDescriptionRequest?.Invoke(this.gameObject.transform);
-        }
-    }
+    //        //tell observers where the object is, the DescriptionController will make a pop up
+    //        onDescriptionRequest?.Invoke(this.gameObject.transform);
+    //    }
+    //}
      
     public void ColorChanger()
     {
