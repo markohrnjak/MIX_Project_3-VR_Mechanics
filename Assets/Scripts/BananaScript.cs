@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class BananaScript : MonoBehaviour
 {
@@ -14,10 +16,21 @@ public class BananaScript : MonoBehaviour
     private Color newColor = new Color(1.0f, 1.0f, 1.0f, 1.0f); // change this to desired color
     private Renderer rend = null;
 
+    public GameObject[] replacementObjects;
+
+    [SerializeField]
+    private GameObject scalerObject;
+
     private void Awake()
     {
         rend = GetComponent<Renderer>(); // gives functionality for the renderer
         rend.enabled = true; //makes the rendered 3d object visible if enabled
+    }
+
+    private void OnEnable()
+    {
+        //start minimized
+        scalerObject.transform.localScale = new Vector3(0, 0, 0);
     }
 
     private void OnCollisionEnter(Collision other)
@@ -32,7 +45,7 @@ public class BananaScript : MonoBehaviour
             onDescriptionRequest?.Invoke(this.gameObject.transform);
         }
     }
-
+     
     public void ColorChanger()
     {
         if ((rend != null))
@@ -42,6 +55,22 @@ public class BananaScript : MonoBehaviour
 
             rend.material.color = newColor;
         }
+    }
+
+    public void openScaler(Transform spawnPos)
+    {
+        Debug.Log("Controller: Bringing up scaler... did rumble work?");
+        VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch);
+
+        //pop out of the spawn point (like the description)
+        LeanTween.scale(spawnPos.gameObject, new Vector3(0.001f, 0.001f, 1.23f), 0.5f);
+    }
+
+    public void replaceObject()
+    {
+        int randomID = Random.Range(0, replacementObjects.Length);
+
+        Resources.Load<GameObject>(replacementObjects[randomID].name);
     }
 
 

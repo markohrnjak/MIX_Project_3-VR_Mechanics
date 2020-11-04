@@ -6,6 +6,8 @@ public class MenuController : MonoBehaviour
 {
     private GameObject menuPrefab;
     public GameObject menuSpawnPoint;
+    public Transform scalerSpawnPoint;
+
     private Transform parentObject;
 
 
@@ -48,10 +50,7 @@ public class MenuController : MonoBehaviour
             case "YellowButtonTrigger":
                 Debug.Log("Yellow pressed - replace");
                 VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch);
-
-
-
-                //code for replacing objects
+                //-----------------------code for replacing objects
 
                 break;
 
@@ -59,38 +58,23 @@ public class MenuController : MonoBehaviour
                 Debug.Log("Blue pressed - color");
                 VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch);
 
-                //code for recoloring objects
+                //----------------------code for recoloring objects
                 parentObject.GetComponent<BananaScript>().ColorChanger();
-
-
-                /* Debugging without VR
-                                var t = GameObject.Find("Banana");
-
-                                if (t != null)
-                                {
-                                    parentObject = t.transform;
-                                    Debug.Log("COLOR CHANGED");
-
-                                    parentObject.GetComponent<BananaScript>().ColorChanger();
-                                }
-                */
-
-
                 break;
+
             case "RedButtonTrigger":
                 Debug.Log("Red pressed - resize");
                 VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch);
 
-
-
-                //code for resizing objects
-
+                //----------------------code for resizing objects
+                parentObject.GetComponent<BananaScript>().openScaler(scalerSpawnPoint);
                 break;
+
             case "GreenButtonTrigger":
                 Debug.Log("Green pressed - destroy");
                 VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch);
 
-                //code for destroy
+                //--------------------code for destroy
 
                 break;
 

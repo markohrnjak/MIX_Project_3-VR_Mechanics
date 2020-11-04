@@ -103,7 +103,7 @@ public class DescriptionController : MonoBehaviour
         if (sourceObject != null)
         {
             Debug.Log("Dismiss success");
-            LeanTween.scale(gameObject, new Vector3(sourceObject.position.x, sourceObject.position.y, sourceObject.position.z), 0.5f).setOnComplete(DestroyMe);
+            LeanTween.scale(gameObject, new Vector3(0, 0, 0), 0.5f);
         }
 
     }
