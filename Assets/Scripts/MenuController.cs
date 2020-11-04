@@ -82,6 +82,7 @@ public class MenuController : MonoBehaviour
                 VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch);
 
 
+
                 //code for resizing objects
 
                 break;
