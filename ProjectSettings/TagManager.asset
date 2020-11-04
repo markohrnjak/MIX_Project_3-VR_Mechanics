@@ -8,6 +8,7 @@ TagManager:
   - ButtonTrigger
   - TestCube
   - Finger
+  - SceneObject
   layers:
   - Default
   - TransparentFX

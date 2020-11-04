@@ -382,6 +382,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1531450320191668609, guid: d38c7be7157c4324e8e3213a48ecf04e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3a60557ec7e007147bfc3d33c22b8645, type: 2}
     - target: {fileID: 8051022862335475405, guid: d38c7be7157c4324e8e3213a48ecf04e, type: 3}
       propertyPath: m_Name
       value: YellowButtonTrigger

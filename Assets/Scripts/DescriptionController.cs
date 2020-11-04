@@ -16,7 +16,7 @@ public class DescriptionController : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI descriptionText = null;
 
-    public delegate void showMeTheMenu();
+    public delegate void showMeTheMenu(Transform theObjectsMenu);
     public static event showMeTheMenu openMenu;
 
     private void OnEnable()
@@ -66,7 +66,7 @@ public class DescriptionController : MonoBehaviour
 
     }
 
-    void OnDisable()
+    void OnDestroy()
     {
         //unsub event
         BananaScript.onDescriptionRequest -= openDescription;
@@ -74,6 +74,8 @@ public class DescriptionController : MonoBehaviour
 
     void openDescription(Transform sourceObject)
     {
+        this.gameObject.SetActive(true);
+
         Debug.Log("Controller: Bringing up description... did rumble work?");
         VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch);
 
@@ -86,8 +88,8 @@ public class DescriptionController : MonoBehaviour
         Debug.Log("Show me the menu! Did rumble work?");
         VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch);
 
-        //tell menu controller to open menu
-        openMenu?.Invoke();
+        //tell menu controller to open menu for the parent object of this script (Banana for testing)
+        openMenu?.Invoke(this.gameObject.transform.parent);
 
     }
 
@@ -110,6 +112,8 @@ public class DescriptionController : MonoBehaviour
     {
         Debug.Log("Destroy Description called");
         //Destroy(gameObject);
+
+        this.gameObject.SetActive(false);
     }
 
 

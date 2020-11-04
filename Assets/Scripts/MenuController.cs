@@ -6,6 +6,7 @@ public class MenuController : MonoBehaviour
 {
     private GameObject menuPrefab;
     public GameObject menuSpawnPoint;
+    private Transform parentObject;
 
 
     private void Awake()
@@ -30,10 +31,11 @@ public class MenuController : MonoBehaviour
     }
 
     //for when the menu is requested
-    void bringUpMenu()
+    void bringUpMenu(Transform parent)
     {
         Debug.Log("Controller: Here is the menu...");
         //-----------------Create Menu Here! --------------------------
+        parentObject = parent;
         Instantiate(menuPrefab, menuSpawnPoint.transform);
     }
 
@@ -45,28 +47,47 @@ public class MenuController : MonoBehaviour
         {
             case "YellowButtonTrigger":
                 Debug.Log("Yellow pressed - replace");
-                VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch); //might need to trigger for specific hand?
+                VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch);
+
+
 
                 //code for replacing objects
 
                 break;
+
             case "BlueButtonTrigger":
                 Debug.Log("Blue pressed - color");
-                VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch); //might need to trigger for specific hand?
+                VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch);
 
                 //code for recoloring objects
+                parentObject.GetComponent<BananaScript>().ColorChanger();
+
+
+                /* Debugging without VR
+                                var t = GameObject.Find("Banana");
+
+                                if (t != null)
+                                {
+                                    parentObject = t.transform;
+                                    Debug.Log("COLOR CHANGED");
+
+                                    parentObject.GetComponent<BananaScript>().ColorChanger();
+                                }
+                */
+
 
                 break;
             case "RedButtonTrigger":
                 Debug.Log("Red pressed - resize");
-                VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch); //might need to trigger for specific hand?
+                VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch);
+
 
                 //code for resizing objects
 
                 break;
             case "GreenButtonTrigger":
                 Debug.Log("Green pressed - destroy");
-                VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch); //might need to trigger for specific hand?
+                VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch);
 
                 //code for destroy
 
