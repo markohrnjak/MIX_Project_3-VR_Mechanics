@@ -104,7 +104,9 @@ public class BananaScript : MonoBehaviour
         VibrationManager.singleton.TriggerVibration(30, 2, 255, OVRInput.Controller.Touch);
 
         //pop out of the spawn point (like the description)
-        LeanTween.scale(spawnPos.gameObject, new Vector3(0.001f, 0.001f, 1.23f), 0.5f);
+        //LeanTween.scale(spawnPos.gameObject, new Vector3(0.001f, 0.001f, 1.23f), 0.5f);
+
+        scalerObject.SetActive(!scalerObject.activeSelf);
     }
 
     public void replaceObject()
@@ -116,28 +118,24 @@ public class BananaScript : MonoBehaviour
 
     }
 
-    public void resizeObject(float value)
-    {
-        this.transform.localScale = transform.localScale * value;
-    }
-
     public void toggleMe(bool hide)
     {
         if(hide == true)
         {
-            this.gameObject.GetComponent<Renderer>().enabled = true;
+            this.gameObject.GetComponent<MeshRenderer>().enabled = true;
         }
 
         if (hide == false)
         {
-            this.gameObject.GetComponent<Renderer>().enabled = false;
+            this.gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
 
     }
 
     public void destroyMe()
     {
-        Destroy(gameObject);
+        toggleMe(true);
+        //Destroy(gameObject);
     }
 
 
